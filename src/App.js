@@ -21,11 +21,28 @@ class App extends Component {
    })
   }
 
-  // componentDidMount(){
-  //   fetch("http://localhost:3000/events/byId").then(res => res.json()).then(json => this.setState({eventsList: json})).catch(function(e) {
-  //   console.log(e); // “oh, no!”
-  //  })
-  // }
+// Add event
+
+addEvent = (title, type, location, date)=>{
+  const newEvent={
+    id: `${100+ this.state.eventsList.length}`,
+    title,
+    type,
+    location,
+    date
+  }
+
+  this.setState({ eventsList: [...this.state.eventsList, newEvent]});
+
+  fetch("http://localhost:3000/events", {
+    method: 'post',
+    body:    JSON.stringify(newEvent),
+    headers: { 'Content-Type': 'application/json'}
+    })
+    .catch(function(e) {console.log(e)})
+  
+}
+
 
 
   render() {
@@ -35,15 +52,15 @@ class App extends Component {
       <div className="App">
         <div className="container">
           <Header/>
+          <AddEvent addEvent= {this.addEvent}/>   
           <Route exact path="/events" render={props =>(
           <React.Fragment>
-            <EventsList eventsList= {this.state.eventsList}/>    
+            <EventsList eventsList= {this.state.eventsList} deleteEvent= {this.state.deleteEvent}/>    
+            {/* <Event deleteEvent={this.state.deleteEvent}/> */}
           </React.Fragment>)} />
-          {/* <Route path="events/byId" render={props =>(
-          <React.Fragment>
-            <GetEventById eventsList = {this.state.eventsList}/>    
-          </React.Fragment>)} /> */}
-
+          
+       
+      
         
       </div>
       </div>

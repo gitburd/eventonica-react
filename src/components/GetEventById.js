@@ -41,9 +41,9 @@ class GetEventById extends Component {
 }
 
 // PropTypes
-EventsList.propTypes= {
-    eventsList: PropTypes.array.isRequired
-}
+// EventsList.propTypes= {
+//     eventsList: PropTypes.array.isRequired
+// }
 
 
 export default GetEventById
