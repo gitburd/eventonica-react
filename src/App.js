@@ -7,6 +7,7 @@ import Event from './components/Event';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './components/layout/header';
 import './App.css';
+import UpdateEvent from './UpdateEvent';
 
 
 const fetch = require('node-fetch');
@@ -40,9 +41,30 @@ addEvent = (title, type, location, date)=>{
     headers: { 'Content-Type': 'application/json'}
     })
     .catch(function(e) {console.log(e)})
-  
+
 }
 
+updateEvent =(id)=>{
+  this.setState({eventsList: this.state.eventsList.map(event=>{
+    if(event.id == id){
+      event.title = "changed"
+    }
+    return event;
+  })})
+}
+
+// delete event
+deleteEvent = (id)=>{
+  this.setState({eventsList:[...this.state.eventsList.filter(event=>event.id!==id)]})
+  fetch(`http://localhost:3000/events/${id}`, {
+    method: 'delete',
+    // body:    JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json'}
+})
+.then(function(ducks) {console.log("it worked!")})
+.catch(function(e) {console.log(e)})
+
+}
 
 
   render() {
@@ -51,15 +73,21 @@ addEvent = (title, type, location, date)=>{
       <Router>
       <div className="App">
         <div className="container">
-          <Header/>
-          <AddEvent addEvent= {this.addEvent}/>   
+          <Header/> 
           <Route exact path="/events" render={props =>(
           <React.Fragment>
-            <EventsList eventsList= {this.state.eventsList} deleteEvent= {this.state.deleteEvent}/>    
-            {/* <Event deleteEvent={this.state.deleteEvent}/> */}
+            <EventsList eventsList= {this.state.eventsList} updateEvent= {this.updateEvent} deleteEvent={this.deleteEvent}/>    
           </React.Fragment>)} />
-          
-       
+          <Route exact path="/events/add" render={props =>(
+          <React.Fragment>
+            <AddEvent addEvent= {this.addEvent}/>  
+            <EventsList eventsList= {this.state.eventsList} updateEvent= {this.updateEvent}/>    
+          </React.Fragment>)} />
+          <Route exact path="/events/update" render={props =>(
+          <React.Fragment>
+            <UpdateEvent/>
+            <EventsList eventsList= {this.state.eventsList} updateEvent= {this.updateEvent}/>    
+          </React.Fragment>)} />
       
         
       </div>
