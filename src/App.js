@@ -44,10 +44,27 @@ addEvent = (title, type, location, date)=>{
 
 }
 
+// update event
 updateEvent =(id)=>{
+
+  const body ={
+    title: `changed`,
+    type: `changed`,
+    location:`changed`,
+    date:`changed`
+  }
+  fetch(`http://localhost:3000/events/${id}`, {
+    method: 'put',
+    body:    JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json'}
+})
+.catch(function(e) {console.log(e)})
   this.setState({eventsList: this.state.eventsList.map(event=>{
     if(event.id == id){
-      event.title = "changed"
+      event.title = "changed";
+      event.type="changed";
+      event.location="changed";
+      event.date="changed";
     }
     return event;
   })})
