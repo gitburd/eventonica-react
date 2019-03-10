@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 // import Event from './components/Event';
 
-export class AddEvent extends Component {
+export class Update extends Component {
     state = {
+        id:'',
         title:'',
         type:'',
         location:'',
@@ -11,7 +12,8 @@ export class AddEvent extends Component {
     
       onSubmit =(e)=> {
         e.preventDefault();
-        this.props.addEvent(this.state.title, this.state.type, this.state.location, this.state.date);
+        this.props.update(this.state.id,this.state.title, this.state.type, this.state.location, this.state.date);
+        this.setState({id: ' '});
         this.setState({title: ' '});
         this.setState({type: ' '});
         this.setState({location: ' '});
@@ -23,6 +25,17 @@ export class AddEvent extends Component {
       render() {
         return (
           <form onSubmit={this.onSubmit} style={{display: 'flex'}}>
+              <label>
+              Event Id:
+               <input 
+             type="text" 
+             name="id" 
+             style={{flex: '10', padding: '5px'}}
+             placeholder="Event Id" 
+             value={this.state.id} 
+             onChange={this.onChange}
+             />
+                </label>          
              <label>
                Event Name:
                <input 
@@ -76,4 +89,4 @@ export class AddEvent extends Component {
       }
     }
 
-export default AddEvent
+export default Update

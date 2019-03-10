@@ -11,7 +11,7 @@ export class UpdateEvent extends Component {
     
       onSubmit =(e)=> {
         e.preventDefault();
-        this.props.addEvent(this.state.title, this.state.type, this.state.location, this.state.date);
+        this.props.updateEvent(this.state.title, this.state.type, this.state.location, this.state.date);
         this.setState({title: ' '});
         // this.props.addEvent(this.state.type);
         this.setState({type: ' '});
