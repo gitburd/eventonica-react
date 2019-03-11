@@ -12,15 +12,14 @@ export class Event extends Component {
     }
   
 
-
-
     render() {
     const { id, title, type, location, date} = this.props.event;
         return (
         <div style={this.getStyle()}>
-         <input type="checkbox" onChange={this.props.updateEvent.bind(this,id)}/>{' '}
+         <input type="checkbox" onChange={this.props.updateEvent.bind(this,this.props.event)}/>{' '}
         <span style={{fontWeight:'bold', fontSize:'18px', color:'purple'}} > {title} </span>
         <span>{"("}{type}{") "}</span>    
+        <br/>
         <span style={{fontWeight:'bold'}}>{"Details: "}</span><span>{location}{", "}{date} </span> 
         <button onClick={this.props.deleteEvent.bind(this,id)}style={btnStyle}>X</button>
         

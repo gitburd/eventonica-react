@@ -19,6 +19,11 @@ export class Update extends Component {
         this.setState({location: ' '});
         this.setState({date: ' '});
       }
+      componentDidUpdate(prevProps){
+        if (this.props.event!==prevProps.event){
+          this.setState({...this.props.event})
+        }
+      }
     
       onChange =(e)=> this.setState({[e.target.name]: e.target.value});
     

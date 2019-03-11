@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "auth0-js": "^9.10.0",
     "axios": "^0.18.0",
     "eventful-node": "^1.1.1",
     "node-fetch": "^2.3.0",

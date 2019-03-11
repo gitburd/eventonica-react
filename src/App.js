@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EventsList from './components/EventsList';
+import ResultEvents from './components/ResultEvents';
 // import GetEventById from './components/GetEventById';
 import AddEvent from './components/AddEvent';
 import UpdateEvent from './components/UpdateEvent';
@@ -21,7 +22,11 @@ const axios = require('axios');
 
 
 class App extends Component {
-  state ={ eventsList:[] }
+  state ={ 
+    eventsList:[],
+    resultEvents:[],
+    selectedEvent:null
+  }
 
   componentDidMount(){
     fetch("http://localhost:3000/events").then(res => res.json()).then(json => this.setState({eventsList: json})).catch(function(e) {
@@ -52,31 +57,34 @@ addEvent = (title, type, location, date)=>{
 }
 
 // update event
-updateEvent = (id)=>{
+updateEvent = (event)=>{
 
-  const body ={
-    title: `changed`,
-    type: `changed`,
-    location:`changed`,
-    date:`changed`
-  }
-  fetch(`http://localhost:3000/events/${id}`, {
-    method: 'put',
-    body:    JSON.stringify(body),
-    headers: { 'Content-Type': 'application/json'}
-})
-.catch(function(e) {console.log(e)})
-  this.setState({eventsList: this.state.eventsList.map(event=>{
-    if(event.id == id){
-      event.title = "changed";
-      event.type="changed";
-      event.location="changed";
-      event.date="changed";
-    }
-    return event;
-  })})
+  this.setState({selectedEvent:event})
+
+//   const body ={
+//     title: `changed`,
+//     type: `changed`,
+//     location:`changed`,
+//     date:`changed`
+//   }
+//   fetch(`http://localhost:3000/events/${id}`, {
+//     method: 'put',
+//     body:    JSON.stringify(body),
+//     headers: { 'Content-Type': 'application/json'}
+// })
+// .catch(function(e) {console.log(e)})
+//   this.setState({eventsList: this.state.eventsList.map(event=>{
+//     if(event.id == id){
+//       event.title = "changed";
+//       event.type="changed";
+//       event.location="changed";
+//       event.date="changed";
+//     }
+//     return event;
+//   })})
 }
 
+// update 
 update = (id,title,type,location,date)=>{
 
   const body ={
@@ -102,10 +110,6 @@ update = (id,title,type,location,date)=>{
   })})
 }
 
-
-
-
-
 // delete event
 deleteEvent = (id)=>{
   this.setState({eventsList:[...this.state.eventsList.filter(event=>event.id!==id)]})
@@ -130,46 +134,61 @@ byId =(id)=>{
 
 // get events from eventful
 getEventful =(keyWords,location)=>{
+  let proxyUrl = "https://cors-anywhere.herokuapp.com/"
+  let targetUrl =
+    `http://api.eventful.com/json/events/search?app_key=${eventfulKey}&q=${keyWords}&l=${location}`
+  fetch(proxyUrl + targetUrl)
+    .then(res => res.json())
+    .then(json => {
+      let firstFive =[]
+      for(let i=0; i<5;i++){
+      console.log(`${json.events.event[i].title}, ${json.events.event[i].venue_name}, ${json.events.event[i].city_name}, ${json.events.event[i].start_time} `)
 
-axios.defaults.headers.common['Authorization'] = eventfulKey;  
-axios.get(`http://api.eventful.com/events?q=${keyWords}&l=${location}`, {mode: "no-cors"})
-.then(response => console.log(response))
-.catch(function(e) {console.log(e)})
-}
-
+      let body =   
+      {
+      title: `${json.events.event[i].title}`, 
+      type:keyWords,
+      location: `${json.events.event[i].venue_name}, ${json.events.event[i].city_name}`,
+      date: `${json.events.event[i].start_time}`
+      
+      
+    }
+    // this.state.eventsList[i]=body
+    firstFive.push(body)
+    
+    // this.state.eventsList.push(body)
+  }
+  this.setState({ eventsList:[...this.state.eventsList,...firstFive], resultEvents:firstFive } )
   
-  // client is not defined error\\\\\
 
-  // client.searchEvents({
-  //   keywords: keyWords,
-  //   location: location,
-    // date: "Next Week"
-  // }, function(err, data){
-  //    if(err){
-  //      return console.error(err);
-  //    }
-  //    let resultEvents = data.search.events.event;
 
-  //    console.log(resultEvents);
-  
-  //   })
+    }).then (res=>{
 
-  ///CORB error- not cors \\\\\
-  // fetch(`http://api.eventful.com/events?q=${keyWords}&l=${location}& oauth_consumer_key=${eventfulKey}`
-  // , {
-  //   method: "get",
-  //   mode: "no-cors",
-  //   headers: { "Content-Type": "application/json"}
-  //   // body: JSON.stringify(data)
-  // })
-  //   .then(response => response.json())
-  //   .then(data=>console.log(data))
-  //   .catch(function(e) {console.log(e)})
-  //   }
+      for(let i=0;i<this.state.resultEvents.length;i++){
+       let  body = { 
+          title:`${this.state.resultEvents[i].title}`,
+          type:`${keyWords}`,
+          location:`${this.state.resultEvents[i].location}`,
+          date:`${this.state.resultEvents[i].start_time}`
+          }
+          console.log(body, JSON.stringify(body))
+          fetch("http://localhost:3000/events", {
+                method: 'post',
+                body:    JSON.stringify(body),
+                headers: { 'Content-Type': 'application/json'}
+                // mode:'no-cors'
+            })
+          .catch(function(e) {console.log(e)});
+      }
+       
+    })
+    
+    .catch(function(e) {console.log(e) })
 
-  
-     
-// post to my api once i get it working
+    
+  }
+
+// post to my api 
 // const body = { 
 // title:`${resultEvents[0].title}`,
 // type:`${keyWords}`,
@@ -183,10 +202,7 @@ axios.get(`http://api.eventful.com/events?q=${keyWords}&l=${location}`, {mode: "
 //       headers: { 'Content-Type': 'application/json'}
 //   })
 // .catch(function(e) {console.log(e)});
-
-
-
-
+// }
 
 
   render() {
@@ -194,19 +210,20 @@ axios.get(`http://api.eventful.com/events?q=${keyWords}&l=${location}`, {mode: "
     return (
       <Router>
       <div className="App">
-        <div className="container">
-          <Header/> 
+      <Header/> 
+        <div className="container" style={{"padding":"20px"}}>
+        
           <Route exact path="/events" render={props =>(
           <React.Fragment>
-            <h2 style={{"padding":"20px"}}> Add Event</h2>
+            <h2 > Add Event</h2>
             <AddEvent addEvent={this.addEvent}/>
-            <div style={{"padding":"20px"}}>
+            <div style={{"padding":"20px 0px"}} >
             <h2>List of Events</h2>
             <EventsList  eventsList= {this.state.eventsList} updateEvent= {this.updateEvent} deleteEvent={this.deleteEvent}/>    
-            
-            <h2>Update Event</h2>
-            <Update eventsList={this.eventsList} update= {this.update}/>
             </div>
+            <h2>Update Event</h2>
+            <Update eventsList={this.eventsList} update= {this.update} event={this.state.selectedEvent}/>
+            
           </React.Fragment>)} />
     
 
@@ -224,7 +241,9 @@ axios.get(`http://api.eventful.com/events?q=${keyWords}&l=${location}`, {mode: "
            <Route path="/events/geteventful" render={props =>(
           <React.Fragment>
            <h2> Get Events from Eventful API </h2>
-           <GetEventful getEventful={this.getEventful}/>
+           <GetEventful getEventful={this.getEventful} />
+           <ResultEvents resultEvents= {this.state.resultEvents} updateEvent= {this.updateEvent} deleteEvent={this.deleteEvent}/>
+           
            </React.Fragment>)} />
 
 

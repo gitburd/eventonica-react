@@ -3,10 +3,17 @@ import React, { Component } from 'react';
 
 export class UpdateEvent extends Component {
     state = {
+      id:'',
         title:'',
         type:'',
         location:'',
         date:' '
+      }
+
+      componentDidUpdate(prevProps){
+        if (this.props!==prevProps){
+          this.setState({...this.props})
+        }
       }
     
       onSubmit =(e)=> {
