@@ -12,6 +12,12 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './components/layout/header';
 import './App.css';
 
+// Auth
+import Auth from './Auth/Auth.js';
+
+const auth = new Auth();
+auth.login();
+
 
 const http = require('http');
 const eventfulKey = require("./keys.js").eventful;
