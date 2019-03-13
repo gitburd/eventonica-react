@@ -16,6 +16,8 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.8"
   },
+  "engines" : { "node" : "11.9.0" }, 
+
   "scripts": {
     "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
