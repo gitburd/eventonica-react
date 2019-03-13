@@ -13,7 +13,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Header from './components/layout/header';
 import './App.css';
 import './index.css';
-
+const path = require('path')
 
 const http = require('http');
 const eventfulKey = 'BrG5fsLbNhxT2b8w';
