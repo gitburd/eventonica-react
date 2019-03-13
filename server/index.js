@@ -21,10 +21,10 @@ app.use(bodyParser.urlencoded({extended: true,}))
 // Modify your express server to serve static files by adding this block to your express server:
 if (process.env.NODE_ENV === "production") {
     // Serve any static files
-    app.use(express.static(path.join('server', "../client/build")));
+    app.use(express.static(path.join(__dirname, "../client/build")));
     // Handle React routing, return all requests to React app
     app.get("*", function(req, res) {
-      res.sendFile(path.join('server', "../client/build", "index.html"));
+      res.sendFile(path.join(__dirname, "../client/build", "index.html"));
     });
   }
   
