@@ -6,7 +6,7 @@ import '../App.css';
 export class Event extends Component {
     getStyle= ()=> {
         return {
-        backgroundColor:'#f4f4f4',
+        backgroundColor:'#fff',
         padding: '10px'
         }
     }
@@ -16,12 +16,12 @@ export class Event extends Component {
     const { id, title, type, location, date} = this.props.event;
         return (
         <div style={this.getStyle()}>
-         <input type="checkbox" onChange={this.props.updateEvent.bind(this,this.props.event)}/>{' '}
-        <span style={{fontWeight:'bold', fontSize:'18px', color:'purple'}} > {title} </span>
-        <span>{"("}{type}{") "}</span>    
+         <input type="checkbox" onChange={this.props.selectEvent.bind(this,this.props.event)}/>{' '}
+        <span style={{fontWeight:'bold', fontSize:'18px', color:'#007fff'}} > {title} </span>
+        <span >{"("}{type}{") "}</span>    
         <br/>
         <span style={{fontWeight:'bold'}}>{"Details: "}</span><span>{location}{", "}{date} </span> 
-        <button onClick={this.props.deleteEvent.bind(this,id)}style={btnStyle}>X</button>
+        <button onClick={this.props.deleteEvent.bind(this,id)} style={btnStyle} className="btnDel">X</button>
         
             
         </div>
@@ -35,14 +35,17 @@ Event.propTypes= {
 }
 
 const btnStyle={
-    background: '#ff0000',
+    background: '#000',
     color:'#fff',
     border:'none',
     padding: '5px 8px',
     borderRadius: '50%',
     cursor: 'pointer',
-    float:'right'
+    float:'right',
+    
 }
+
+
 
 
 export default Event

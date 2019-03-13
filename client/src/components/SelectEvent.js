@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import Event from './components/Event';
 
-export class UpdateEvent extends Component {
+export class SelectEvent extends Component {
     state = {
       id:'',
         title:'',
@@ -18,7 +18,7 @@ export class UpdateEvent extends Component {
     
       onSubmit =(e)=> {
         e.preventDefault();
-        this.props.updateEvent(this.state.title, this.state.type, this.state.location, this.state.date);
+        this.props.SelectEvent(this.state.title, this.state.type, this.state.location, this.state.date);
         this.setState({title: ' '});
         // this.props.addEvent(this.state.type);
         this.setState({type: ' '});
@@ -86,4 +86,4 @@ export class UpdateEvent extends Component {
       }
     }
 
-export default UpdateEvent
+export default SelectEvent

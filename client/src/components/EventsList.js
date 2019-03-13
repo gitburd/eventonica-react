@@ -9,7 +9,7 @@ class EventsList extends Component {
 
     return this.props.eventsList.map((event)=>(
         
-        <Event key={event.id} event={event}  updateEvent={this.props.updateEvent} deleteEvent={this.props.deleteEvent}/>
+        <Event key={event.id} event={event}  selectEvent={this.props.selectEvent} deleteEvent={this.props.deleteEvent}/>
     ));
     
   }

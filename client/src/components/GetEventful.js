@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 // import Event from './components/Event';
+import Event from './Event';
+import PropTypes from 'prop-types';
+import '../App.css';
 
 
 export class GetEventful extends Component {

@@ -9,10 +9,10 @@ class ResultEvents extends Component {
 
     return this.props.resultEvents.map((event)=>(
         
-        <Event key={event.id} event={event}  updateEvent={this.props.updateEvent} deleteEvent={this.props.deleteEvent}/>
+        <Event key={event.id} event={event}  selectEvent={this.props.selectEvent} deleteEvent={this.props.deleteEvent}/>
     ));
     
-  }
+  } 
 }
 
 // PropTypes

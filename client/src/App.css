@@ -1,0 +1,171 @@
+.eventsList{
+  padding: '10px';
+  color:'red';
+  font-family: 'Poppins', sans-serif;
+}
+
+/* font-family: 'Ubuntu', sans-serif;
+font-family: 'Poppins', sans-serif;  */
+
+.nav{
+  background:#007fff;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  list-style-type: none;
+  display: inline-block;
+}
+.nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.nav li {
+  float: left;
+}
+
+.nav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 5px 20px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+.nav li a:hover {
+  background-color: #01478e;
+}
+
+
+
+.addEvent{
+  padding: '10px';
+  /* padding-bottom: '30px'; */
+
+  background:#ed7207;
+  align-items: center;
+  justify-content: center;
+  font-size: calc( 5+2vmin);
+  display: flex;
+  flex-direction: column;
+
+}
+
+.addEventForm{
+  padding: '20px';
+  background:#ed7207;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(4px + 2vmin);
+  display: flex;
+  flex-direction: row;
+  /* margin: 0 10px; */
+ 
+
+}
+
+
+.updateEvent{
+  padding: '20px';
+  background:#ed7207;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.App {
+  text-align: center;
+}
+
+
+.header {
+  background-color: #007fff;
+  min-height: 2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 20px;
+}
+
+
+.App-link {
+  color: #61dafb;
+}
+/* 
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
+/* *{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+} */
+
+body{
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  line-height: 1.4;
+
+}
+
+h2{
+  font-family: 'Ubuntu', sans-serif;
+}
+
+a{
+  color: #333;
+  text-decoration: none;
+}
+
+
+.containter{
+  padding: 0 .8rem;
+}
+
+.btn{
+  /* display: inline-block; */
+  border: none;
+  background:#007fff;
+  color:#fff;
+  padding: 10px;
+  cursor:pointer;
+  font-size: calc(2vmin);
+  font-weight: bold;
+  margin: 0 10px;
+  display: flex;
+}
+
+.btn:hover{
+  background:#01478e;
+}
+
+
+.btnDel{
+  background: '#000';
+  color:'#fff';
+  border:'none';
+  padding: '5px 8px';
+  border-radius: '50%';
+  cursor: 'pointer';
+  float:'right';
+}
+.btnDel:hover{
+  background:#ff0000;
+}
+
+h1{
+  font-weight: normal;
+}

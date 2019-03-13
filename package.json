@@ -1,32 +1,21 @@
 {
-  "name": "eventonica-react",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "auth0-js": "^9.10.0",
-    "axios": "^0.18.0",
-    "eventful-node": "^1.1.1",
-    "node-fetch": "^2.3.0",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.1.8"
-  },
+  "name": "eventonicaapi",
+  "version": "1.0.0",
+  "description": "test event api",
+  "main": "app.js",
   "scripts": {
-    "start": "PORT=3001 react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "proxy": "http://localhost:3000"
+  "author": "dena",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "inquirer": "^6.2.2",
+    "pg": "^7.8.1",
+    "request": "^2.88.0"
+  }
 }
