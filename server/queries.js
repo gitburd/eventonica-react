@@ -18,8 +18,7 @@ const pool = new Pool({
 });
 
 const getEvents = (request, response) => {
-  const client = await pool.connect();
-    client.query('SELECT * FROM events', (error, results) => {
+    pool.query('SELECT * FROM events', (error, results) => {
       if (error) {
         throw error
       }
@@ -30,8 +29,7 @@ const getEvents = (request, response) => {
   const getEventById = (request, response) => {
     const id = parseInt(request.params.id)
     console.log(id)
-    const client = await pool.connect();
-    client.query('SELECT * FROM events WHERE id = $1', [id], (error, results) => {
+    pool.query('SELECT * FROM events WHERE id = $1', [id], (error, results) => {
       
       if (error) {
         throw error
@@ -44,8 +42,8 @@ const createEvent = (request, response) => {
     const { title,type,location, date } = request.body
     console.log(request.body)
     console.log(title,type,location,date)
-    const client = await pool.connect();
-    client.query('INSERT INTO events(title,type,location, date) VALUES ($1, $2, $3, $4)', [title,type,location, date], (error, results) => {
+    
+      pool.query('INSERT INTO events(title,type,location, date) VALUES ($1, $2, $3, $4)', [title,type,location, date], (error, results) => {
           if (error) {
               throw error
             }
@@ -56,8 +54,8 @@ const createEvent = (request, response) => {
   const updateEvent = (request, response)=> {
     const id = parseInt(request.params.id)
     const { title,type,location,date } = request.body
-    const client = await pool.connect();
-    client.query(
+  
+    pool.query(
       'UPDATE events SET title = $2, type = $3, location = $4, date =$5 WHERE id = $1',
       [id,title,type,location, date],
       (error, results) => {
@@ -71,8 +69,8 @@ const createEvent = (request, response) => {
   
   const deleteEvent = (request, response) => {
     const id = parseInt(request.params.id)
-    const client = await pool.connect();
-    client.query('DELETE FROM events WHERE id = $1', [id], (error, results) => {
+  
+    pool.query('DELETE FROM events WHERE id = $1', [id], (error, results) => {
       if (error) {
         throw error
       }
@@ -88,5 +86,5 @@ const createEvent = (request, response) => {
     getEventById,
     createEvent,
     updateEvent,
-    deleteEvent,
+    deleteEvent
   };
