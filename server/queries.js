@@ -87,4 +87,5 @@ const createEvent = (request, response) => {
     createEvent,
     updateEvent,
     deleteEvent,
+    pool
   };
