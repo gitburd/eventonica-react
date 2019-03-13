@@ -16,7 +16,7 @@ import './index.css';
 
 
 const http = require('http');
-const eventfulKey = require("./keys.js").eventful;
+const eventfulKey = 'BrG5fsLbNhxT2b8w';
 const eventful = require('eventful-node');
 // const client = new eventful.Client(eventfulKey);
 const fetch = require('node-fetch');
