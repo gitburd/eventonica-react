@@ -12,7 +12,7 @@ const Pool = require('pg').Pool
 // on heroku
 const pool = new Pool({
   // Make sure you swap out <user> and <password>
-  connectionString: process.env.DATABASE_URL || 'postgres://@localhost:5432/eventonicaapp/',
+  connectionString: process.env.DATABASE_URL || 'postgres://@localhost:5432/eventonicaapp/DATABASE/',
   // Use SSL but only in production
   ssl: process.env.NODE_ENV === 'production'
 });
