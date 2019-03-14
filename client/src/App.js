@@ -38,7 +38,7 @@ class App extends Component {
 
   componentDidMount(){
   
-    fetch("http://localhost:3000/events").then(res => res.json()).then(json => this.setState({eventsList: json})).catch(function(e) {
+    fetch("/events").then(res => res.json()).then(json => this.setState({eventsList: json})).catch(function(e) {
       console.log(e); // “oh, no!”
      })
   }
@@ -61,7 +61,7 @@ addEvent = (title, type, location, date)=>{
 
   this.setState({ eventsList: [...this.state.eventsList, newEvent]});
 
-  fetch("http://localhost:3000/events", {
+  fetch("/events", {
     method: 'post',
     body:    JSON.stringify(newEvent),
     headers: { 'Content-Type': 'application/json'}
@@ -84,7 +84,7 @@ update = (id,title,type,location,date)=>{
     location,
     date
   }
-  fetch(`http://localhost:3000/events/${id}`, {
+  fetch(`/events/${id}`, {
     method: 'put',
     body:    JSON.stringify(body),
     headers: { 'Content-Type': 'application/json'}
@@ -104,7 +104,7 @@ update = (id,title,type,location,date)=>{
 // delete event
 deleteEvent = (id)=>{
   this.setState({eventsList:[...this.state.eventsList.filter(event=>event.id!==id)]})
-  fetch(`http://localhost:3000/events/${id}`, {
+  fetch(`/events/${id}`, {
     method: 'delete',
     // body:    JSON.stringify(body),
     headers: { 'Content-Type': 'application/json'}
@@ -116,7 +116,7 @@ deleteEvent = (id)=>{
 
 // by id
 byId =(id)=>{
-  fetch(`http://localhost:3000/events/${id}`)
+  fetch(`/events/${id}`)
   .then(res => res.json())
   .then(json => this.setState({eventsList: json}))
   .catch(function(e) {console.log(e); // “oh, no!”
@@ -163,7 +163,7 @@ getEventful =(keyWords,location)=>{
           date:`${this.state.resultEvents[i].start_time}`
           }
           console.log(body, JSON.stringify(body))
-          fetch("http://localhost:3000/events", {
+          fetch("/events", {
                 method: 'post',
                 body:    JSON.stringify(body),
                 headers: { 'Content-Type': 'application/json'}
