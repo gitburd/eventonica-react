@@ -41,4 +41,4 @@ app.delete('/events/:id/', db.deleteEvent)
 
 
 app.set('port', process.env.PORT || 3000);
-app.listen(process.env.PORT || 3000, () => console.log('API listening!'));
+app.listen(process.env.PORT, () => console.log('API listening!'));
