@@ -2,11 +2,11 @@
   "name": "eventonicaapi",
   "version": "1.0.0",
   "description": "test event api",
-  // "main": "app.js",
+  
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/index.js",
-    // "build": "webpack",
+  
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "author": "dena",
