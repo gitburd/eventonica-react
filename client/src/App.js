@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import { Nav,  Navbar,Button } from 'react-bootstrap';
 import EventsList from './components/EventsList';
 import ResultEvents from './components/ResultEvents';
 // import GetEventById from './components/GetEventById';
@@ -33,7 +34,7 @@ class App extends Component {
 
   componentDidMount(){
   
-    fetch("/events").then(res => res.json()).then(json => this.setState({eventsList: json})).catch(function(e) {
+    fetch("/events/").then(res => res.json()).then(json => this.setState({eventsList: json})).catch(function(e) {
       console.log(e); // “oh, no!”
      })
   }
