@@ -31,21 +31,15 @@ class App extends Component {
   }
 
 
-  
-
-
-
 
   componentDidMount(){
   
-    fetch("/events").then(res => res.json()).then(json => this.setState({eventsList: json})).catch(function(e) {
+    fetch("/events/").then(res => res.json()).then(json => this.setState({eventsList: json})).catch(function(e) {
       console.log(e); // “oh, no!”
      })
   }
 
  
-
-
 
 
 // Add event
@@ -61,7 +55,7 @@ addEvent = (title, type, location, date)=>{
 
   this.setState({ eventsList: [...this.state.eventsList, newEvent]});
 
-  fetch("/events", {
+  fetch("/events/", {
     method: 'post',
     body:    JSON.stringify(newEvent),
     headers: { 'Content-Type': 'application/json'}
@@ -127,7 +121,7 @@ byId =(id)=>{
 getEventful =(keyWords,location)=>{
   let proxyUrl = "https://cors-anywhere.herokuapp.com/"
   let targetUrl =
-    `http://api.eventful.com/json/events/search?app_key=${eventfulKey}&q=${keyWords}&l=${location}`
+    `http://api.eventful.com/json/events/search?app_key=${eventfulKey}&q=${keyWords}&l=${location}/`
   fetch(proxyUrl + targetUrl)
     .then(res => res.json())
     .then(json => {
@@ -163,7 +157,7 @@ getEventful =(keyWords,location)=>{
           date:`${this.state.resultEvents[i].start_time}`
           }
           console.log(body, JSON.stringify(body))
-          fetch("/events", {
+          fetch("/events/", {
                 method: 'post',
                 body:    JSON.stringify(body),
                 headers: { 'Content-Type': 'application/json'}
