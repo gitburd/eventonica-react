@@ -10,7 +10,7 @@ const http= require('http')
 // const inquirer = require('inquirer');
 
 const db = require('./queries');
-const port = 3000;
+const port = null;
 
 // express midware
 app.use(express.json());
