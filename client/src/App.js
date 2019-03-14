@@ -128,7 +128,7 @@ getEventful =(keyWords,location)=>{
   let proxyUrl = "https://cors-anywhere.herokuapp.com/"
   
   // let targetUrl = `https://....
-  let targetUrl = `https://api.eventful.com/json/events/search?app_key=${eventfulKey}&q=${keyWords}&l=${location}`
+  let targetUrl = `http://api.eventful.com/json/events/search?app_key=${eventfulKey}&q=${keyWords}&l=${location}`
   fetch(proxyUrl + targetUrl)
     .then(res => res.json())
     .then(json => {
