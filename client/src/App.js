@@ -31,11 +31,6 @@ class App extends Component {
   }
 
 
-  
-
-
-
-
   componentDidMount(){
   
     fetch("/events").then(res => res.json()).then(json => this.setState({eventsList: json})).catch(function(e) {
@@ -51,6 +46,7 @@ class App extends Component {
 // Add event
 
 addEvent = (title, type, location, date)=>{
+  
   const newEvent={
     id: `${100+ this.state.eventsList.length}`,
     title,
@@ -61,11 +57,17 @@ addEvent = (title, type, location, date)=>{
 
   this.setState({ eventsList: [...this.state.eventsList, newEvent]});
 
+  fetch("/events").then(res => res.json()).then(json => this.setState({eventsList: json}))
+  // .catch(function(e) {
+  //   console.log(e); // “oh, no!”
+  //  })
+.then(
   fetch("/events", {
     method: 'post',
     body:    JSON.stringify(newEvent),
     headers: { 'Content-Type': 'application/json'}
     })
+    )
     .catch(function(e) {console.log(e)})
 
 }
