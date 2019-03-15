@@ -10,7 +10,7 @@ const http= require('http')
 // const inquirer = require('inquirer');
 
 const db = require('./queries');
-const port = null;
+const port = 3000;
 
 // express midware
 app.use(express.json());
@@ -32,13 +32,14 @@ if (process.env.NODE_ENV === "production") {
 // calling my server to get info from my database
 // when u get a request for this end point run this function 
 app.get('/', db.getEvents);
-app.get('/events/', db.getEvents);
-app.get('/events/:id/', db.getEventById);
-app.post('/events/', db.createEvent);
-app.put('/events/:id/', db.updateEvent);
-app.delete('/events/:id/', db.deleteEvent)
+app.get('/events', db.getEvents);
+app.get('/events/:id', db.getEventById);
+app.post('/events', db.createEvent);
+app.put('/events/:id', db.updateEvent);
+app.delete('/events/:id', db.deleteEvent)
 
 
 
 app.set('port', process.env.PORT || 3000);
-app.listen(process.env.PORT, () => console.log('API listening!'));
+console.log('API listening!')
+app.listen(process.env.PORT || 3000, () => console.log('API listening!'));
