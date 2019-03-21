@@ -33,7 +33,12 @@ class App extends Component {
 
   componentDidMount(){
   
-    fetch("/events").then(res => res.json()).then(json => this.setState({eventsList: json})).catch(function(e) {
+    fetch("/api/events", {
+      method: 'get',
+      body:    JSON.stringify(newEvent),
+      headers: { 'Content-Type': 'application/json'}
+      })
+      .then(res => res.json()).then(json => this.setState({eventsList: json})).catch(function(e) {
       console.log(e); // “oh, no!”
      })
   }
@@ -57,12 +62,12 @@ addEvent = (title, type, location, date)=>{
 
   this.setState({ eventsList: [...this.state.eventsList, newEvent]});
 
-  fetch("/events").then(res => res.json()).then(json => this.setState({eventsList: json}))
+  fetch("/api/events").then(res => res.json()).then(json => this.setState({eventsList: json}))
   // .catch(function(e) {
   //   console.log(e); // “oh, no!”
   //  })
 .then(
-  fetch("/events", {
+  fetch("/api/events", {
     method: 'post',
     body:    JSON.stringify(newEvent),
     headers: { 'Content-Type': 'application/json'}
@@ -86,7 +91,7 @@ update = (id,title,type,location,date)=>{
     location,
     date
   }
-  fetch(`/events/${id}`, {
+  fetch(`/api/events/${id}`, {
     method: 'put',
     body:    JSON.stringify(body),
     headers: { 'Content-Type': 'application/json'}
@@ -106,7 +111,7 @@ update = (id,title,type,location,date)=>{
 // delete event
 deleteEvent = (id)=>{
   this.setState({eventsList:[...this.state.eventsList.filter(event=>event.id!==id)]})
-  fetch(`/events/${id}`, {
+  fetch(`/api/events/${id}`, {
     method: 'delete',
     // body:    JSON.stringify(body),
     headers: { 'Content-Type': 'application/json'}
@@ -118,7 +123,7 @@ deleteEvent = (id)=>{
 
 // by id
 byId =(id)=>{
-  fetch(`/events/${id}`)
+  fetch(`/api/events/${id}`)
   .then(res => res.json())
   .then(json => this.setState({eventsList: json}))
   .catch(function(e) {console.log(e); // “oh, no!”
@@ -165,7 +170,7 @@ getEventful =(keyWords,location)=>{
           date:`${this.state.resultEvents[i].start_time}`
           }
           console.log(body, JSON.stringify(body))
-          fetch("/events", {
+          fetch("/api/events", {
                 method: 'post',
                 body:    JSON.stringify(body),
                 headers: { 'Content-Type': 'application/json'}
