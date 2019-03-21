@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({extended: true,}))
 
 // calling my server to get info from my database
 // when u get a request for this end point run this function 
-app.get('/', db.getEvents);
+app.get('/api', db.getEvents);
 app.get('/api/events', db.getEvents);
 app.get('/api/events/:id', db.getEventById);
 app.post('/api/events', db.createEvent);
