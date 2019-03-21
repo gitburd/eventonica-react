@@ -35,7 +35,6 @@ class App extends Component {
   
     fetch("/api/events", {
       method: 'get',
-      body:    JSON.stringify(newEvent),
       headers: { 'Content-Type': 'application/json'}
       })
       .then(res => res.json()).then(json => this.setState({eventsList: json})).catch(function(e) {
